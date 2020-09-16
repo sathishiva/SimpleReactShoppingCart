@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CartItem from "./CartItem";
+import CartHead from "./CartHead";
 
 function Cart({ initialItems }) {
   const initialState = JSON.parse(localStorage.getItem("items"));
   const [items, setItems] = useState(initialState || initialItems);
-  const [count, setCount] = useState(0);
+  // the below code is to demo useEffect dependency
+  // const [count, setCount] = useState(0);
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
   }, [items]);
@@ -24,7 +26,9 @@ function Cart({ initialItems }) {
   return (
     <div>
       <h1>Shopping Cart</h1>
-      <button onClick={() => setCount(count + 1)}>{count}</button>
+      {/* this button is to demo useEffect dependency */}
+      {/* <button onClick={() => setCount(count + 1)}>{count}</button> */}
+      <CartHead />
       {items.map((item) => (
         <CartItem key={item.id} {...item} updateQty={updateQty} />
       ))}
